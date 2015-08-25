@@ -27,5 +27,11 @@
     "mkdirp": "^0.5.1",
     "request": "^2.61.0",
     "tar": "^2.1.1"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.4",
+    "istanbul": "^0.3.18",
+    "mocha": "^2.2.5",
+    "should": "^7.0.4"
   }
 }
