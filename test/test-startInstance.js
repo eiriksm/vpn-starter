@@ -39,7 +39,7 @@ describe('startInstance module', function() {
     // Just add the keyName for coverage.
     config.keyName = 'test';
     si(config, function(err, c) {
-      should(err).equal(undefined);
+      should(err).equal(null);
       c.id.should.equal(randomId);
     });
   });
