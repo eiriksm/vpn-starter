@@ -13,7 +13,7 @@ function unzipAndExtract(config, callback) {
   var innerCallback = function(err) {
     callback(err, id, ip);
   };
-  var archivePath = path.join(__dirname, '..', ip);
+  var archivePath = path.join(config.downloadDir, '..', ip);
   logger('Starting unzip and extract of', archivePath);
   var p = path.join(archivePath, 'dump.tar.gz');
   var exx = tar.Extract({path: archivePath})

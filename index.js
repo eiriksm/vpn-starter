@@ -10,17 +10,22 @@ var ec2 = new AWS.EC2({apiVersion: '2015-04-15'});
 var startInstance = require('./src/startInstance');
 var connectToInstance = require('./src/connectToInstance');
 var findPublicIp = require('./src/findPublicIp');
+var makeDownloadDirectory = require('./src/makeDownloadDirectory');
+var downloadDump = require('./src/downloadDump');
 var unzipAndExtract = require('./src/unzipAndExtract');
 var logger = require('./src/logger');
 
 var shuttingDown, id;
 var config = require('./config');
 config.ec2 = ec2;
+config.timeout = 60000;
 
 async.waterfall([
   startInstance.bind(null, config),
   findPublicIp,
   connectToInstance,
+  makeDownloadDirectory,
+  downloadDump,
   unzipAndExtract
 ], function(err, ider, ip) {
   id = ider;

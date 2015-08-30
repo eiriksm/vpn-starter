@@ -4,7 +4,8 @@
   "description": "Start a VPN in AWS cloud, poll for ready status, download client files.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "npm run lint && mocha",
+    "lint": "eslint . "
   },
   "repository": {
     "type": "git",
