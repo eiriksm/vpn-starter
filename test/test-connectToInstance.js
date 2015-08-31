@@ -1,6 +1,12 @@
 'use strict';
 
-var http = require('http');
+var https = require('https');
+var fs = require('fs');
+var path = require('path');
+var options = {
+  key: fs.readFileSync(path.join(__dirname, 'certs', 'key.key')),
+  cert: fs.readFileSync(path.join(__dirname, 'certs', 'cert.cert'))
+};
 
 var cti = require('../src/connectToInstance');
 
@@ -33,7 +39,7 @@ describe('connectToInstance module', function() {
       }
     }
 
-    server = http.createServer(responseToRequests).listen(8889);
+    server = https.createServer(options, responseToRequests).listen(8889);
     cti(config, function(e) {
       config.should.not.equal(undefined);
       done(e);

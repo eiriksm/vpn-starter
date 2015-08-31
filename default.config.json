@@ -1,4 +1,4 @@
 {
-  "keyName": "keyName (optional)",
-  "subnet": "subnet id (not optional if using small instances)"
+  "subnet": "subnet id (not optional if using small instances)",
+  "keyName": "keyName (optional)"
 }

@@ -9,7 +9,10 @@ function downloadDump(config, callback) {
   var dir = config.downloadDir;
   var ip = config.ip;
   var s = fs.createWriteStream(dir + '/dump.tar.gz');
-  request('http://' + ip + ':8889/dump')
+  request({
+    url: 'https://' + ip + ':8889/dump',
+    rejectUnauthorized: false
+  })
   .pipe(s);
   s.on('finish', function() {
     logger('Dump available at', dir);

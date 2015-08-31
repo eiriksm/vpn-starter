@@ -8,8 +8,10 @@ function connectToInstance(config, callback) {
   var ip = config.ip;
   logger('Trying to communicate with server at', ip);
   request({
-    url: 'http://' + ip + ':8889',
-    timeout: config.timeout
+    url: 'https://' + ip + ':8889',
+    timeout: config.timeout,
+    // Since we use a self-signed cert on the other end, we need this.
+    rejectUnauthorized: false
   }, function (error, response) {
     if (!error && response.statusCode === 200) {
       logger('Received a 200 from instance... Trying to download keys.');

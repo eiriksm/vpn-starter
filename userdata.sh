@@ -3,7 +3,7 @@ set -e -x
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install openvpn easy-rsa curl vim apache2 -y
-IPADDR=$(curl curl http://169.254.169.254/latest/meta-data/public-ipv4)
+IPADDR=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
 gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz > /etc/openvpn/server.conf
 sed -ie 's/dh dh1024.pem/dh dh2048.pem/' /etc/openvpn/server.conf
 sed -ie 's/;push "redirect-gateway def1 bypass-dhcp"/push "redirect-gateway def1 bypass-dhcp"/' /etc/openvpn/server.conf
@@ -81,5 +81,16 @@ EOF
 initctl reload-configuration
 cd /home/ubuntu
 npm i fstream tar
+
+# Generate a self-signed certificate.
+openssl req \
+    -new \
+    -newkey rsa:4096 \
+    -days 365 \
+    -nodes \
+    -x509 \
+    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" \
+    -keyout key.key \
+    -out cert.cert
 
 start client
