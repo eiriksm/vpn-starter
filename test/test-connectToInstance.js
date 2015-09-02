@@ -41,6 +41,7 @@ describe('connectToInstance module', function() {
 
     server = https.createServer(options, responseToRequests).listen(8889);
     cti(config, function(e) {
+      server.close();
       config.should.not.equal(undefined);
       done(e);
     });
